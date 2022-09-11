@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "mocha app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3"
+    "mocha" : "latest"
   }
 }
