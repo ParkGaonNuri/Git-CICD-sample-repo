@@ -45,7 +45,6 @@ stages:
           - task: Npm@1
             inputs:
               command: 'custom'
-              workingDir: '$(Build.SourcesDirectory)/azure-app/'
               customCommand: 'run start'
       - job: Build
         displayName: Build
