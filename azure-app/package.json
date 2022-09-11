@@ -4,11 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "mocha app.js"
+    "start": "npm app.js"
   },
-  "devDependencies": {
-   "mocha": "latest",
- },
   "author": "",
   "license": "ISC",
   "dependencies": {
