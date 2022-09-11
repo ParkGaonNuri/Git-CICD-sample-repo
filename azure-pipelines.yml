@@ -1,0 +1,71 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'nuri-acr-connection'
+  imageRepository: 'azure-app'
+  containerRegistry: 'nuriacr.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/azure-app/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+stages:
+  - stage: My_Environment
+    displayName: Print params, Test, Build and Push Stage
+    jobs:
+      - job: Print_Parameters
+        displayName: Print Parameters
+        steps:
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                echo 'Print All Parameters'
+                echo 'Service Connection: ' $(dockerRegistryServiceConnection)
+                echo 'Image Repository: ' $(imageRepository)
+                echo 'Azure Container Registry: ' $(containerRegistry)
+                echo 'Dockerfile Path: ' $(dockerfilePath)
+                echo 'Build ID: ' $(tag)
+      - job: Application_Tests
+        displayName: Npm Install and Npm Test
+        dependsOn: Print_Parameters
+        steps:
+          - task: Npm@1
+            inputs:
+              command: 'install'
+              workingDir: '$(Build.SourcesDirectory)/azure-app'
+          - task: Npm@1
+            inputs:
+              command: 'custom'
+              customCommand: 'run start'
+      - job: Build
+        displayName: Build
+        dependsOn: Application_Tests
+        steps:
+          - task: Docker@2
+            displayName: Build and push the image to the Azure container registry
+            inputs:
+              containerRegistry: 'nuri-acr-connection'
+              repository: '$(imageRepository)'
+              command: 'buildAndPush'
+              Dockerfile: '$(dockerfilePath)'
+              buildContext: 
+              tags: '$(tag)'
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(System.DefaultWorkingDirectory)/deployment/'
+              ArtifactName: 'azure-app-artifact'
+              publishLocation: 'Container'
+            
+
+
+
+            
