@@ -41,10 +41,11 @@ stages:
           - task: Npm@1
             inputs:
               command: 'install'
-              workingDir: '$(Build.SourcesDirectory)/azure-app'
+              workingDir: '$(Build.SourcesDirectory)/azure-app/'
           - task: Npm@1
             inputs:
               command: 'custom'
+              workingDir: '$(Build.SourcesDirectory)/azure-app/'
               customCommand: 'run start'
       - job: Build
         displayName: Build
