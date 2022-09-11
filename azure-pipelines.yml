@@ -45,7 +45,6 @@ stages:
               repository: '$(imageRepository)'
               command: 'buildAndPush'
               Dockerfile: '$(dockerfilePath)'
-              buildContext: 
               tags: '$(tag)'
           - task: PublishBuildArtifacts@1
             inputs:
