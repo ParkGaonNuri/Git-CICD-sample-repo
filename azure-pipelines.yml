@@ -45,13 +45,16 @@ stages:
               repository: '$(imageRepository)'
               command: 'buildAndPush'
               Dockerfile: '$(dockerfilePath)'
-              tags: '$(tag)'
+              tags: |
+                $(tag)
+                latest
           - task: PublishBuildArtifacts@1
             inputs:
               PathtoPublish: '$(System.DefaultWorkingDirectory)/deployment/'
               ArtifactName: 'azure-app-artifact'
               publishLocation: 'Container'
-            
+
+
 
 
 
