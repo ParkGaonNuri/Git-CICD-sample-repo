@@ -41,7 +41,7 @@ stages:
           - task: Docker@2
             displayName: Build and push the image to the Azure container registry
             inputs:
-              containerRegistry: 'nuri-acr-connection'
+              containerRegistry: '$(dockerRegistryServiceConnection)'
               repository: '$(imageRepository)'
               command: 'buildAndPush'
               Dockerfile: '$(dockerfilePath)'
