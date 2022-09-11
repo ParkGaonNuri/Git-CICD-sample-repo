@@ -6,10 +6,12 @@
   "scripts": {
     "start": "mocha app.js"
   },
+  "devDependencies": {
+   "mocha": "latest",
+ },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3"
-    "mocha" : "latest"
   }
 }
