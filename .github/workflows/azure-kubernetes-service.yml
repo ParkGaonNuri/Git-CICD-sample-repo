@@ -82,11 +82,7 @@ jobs:
       run: |
         ls -la
         git clone https://github.com/ParkGaonNuri/argotest.git
-        cp -rf ./azure-app.yaml ./argotest/manifests/azure-app.yaml
+        ls -la
         cd ./argotest
-        git config --global user.email "psangah28@gmail.com"
-        git config --global user.name "ParkGaonNuri"
-        git add .
-        git commit -m "${{ github.run_id }}"
-        git push origin master
+        ls -la
         
