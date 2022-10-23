@@ -59,7 +59,7 @@ jobs:
     # Builds and pushes an image up to your Azure Container Registry
     - name: Build and push image to ACR
       run: |
-        az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.run_attempt }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} ./azure-app
+        az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.run_id }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} ./azure-app
   
   createmanifests:
     permissions:
@@ -75,6 +75,6 @@ jobs:
     # Retrieves your Azure Kubernetes Service cluster's kubeconfig file
     - name: Edit manifest files
       run: |
-        cat ./deployment/azure-app-deployment.yaml | sed -e "s|ACR_REPO_URL|${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io|;s|BUILD_ID|${{ github.run_attempt }}|" > azure-app.yaml
+        cat ./deployment/azure-app-deployment.yaml | sed -e "s|ACR_REPO_URL|${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io|;s|BUILD_ID|${{ github.run_id }}|" > azure-app.yaml
         cat azure-app.yaml
         
