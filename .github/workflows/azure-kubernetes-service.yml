@@ -85,7 +85,7 @@ jobs:
         cp -rf ./azure-app.yaml ./argotest/manifests/azure-app.yaml
         cd ./argotest
         git config --global user.email "psangah28@gmail.com"
-        git config --global user.name "gaonnuri"
+        git config --global user.name "nuripark"
         git add .
         git commit -m "${{ github.run_id }}"
         git push
