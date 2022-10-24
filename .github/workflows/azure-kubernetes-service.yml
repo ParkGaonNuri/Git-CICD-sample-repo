@@ -81,7 +81,7 @@ jobs:
     - name: Push to gitops repository
       run: |
         ls -la
-        git clone https://ParkGaonNuri:11ARQPKPY0WaTXSpQvQ7Bf_hqXY6yeJOCNH8T6ziRiCHCijNC8zjtMKchDTKEREriIW3E6NLH3ZixJ51XC@github.com/ParkGaonNuri/argotest.git
+        git clone https://ParkGaonNuri:{{ secrets.ACCESS_TOKEN }}@github.com/ParkGaonNuri/argotest.git
         cp -rf ./azure-app.yaml ./argotest/manifests/azure-app.yaml
         cd ./argotest
         git config --global user.email "psangah28@gmail.com"
